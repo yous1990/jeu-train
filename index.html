@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" type="text/css" href="style.css">
+  <title>miniprojet-train</title>
+</head>
+<body>
+  <div id="boom"> <img src="boom.jpg"></div>
+  <div id="container">
+    <p>
+      <ul>
+        <li>clique le train pour le faire accelerer</li>
+        <li>clique stop le plus tard possible </li>
+        <li>Mais avant qu'il s'écrase au bord!</li>
+      </ul>
+    </p>
+    <div id="rails">
+      <div id="train"><img src="train.png" onclick="accelererTrain()" ></div>
+    </div>
+    <div id="btnstopper" >Stop!</div>
+  </div>
+  <script>
+    var elemt = document.getElementById('train');
+    var btn=document.getElementById('btnstopper');
+    btn.addEventListener("click",stopper.bind(null, 'bravo!'));
+    //.bind prend au moins 1 argument : le premier argument est tjr le contexte
+    //(c'est le this); le reste des arguments comme ici par exemple le message
+    //'bravo!' sont les paramétres c'est la liste des paramétres de la function
+    //le contexte c'est quoi?: object courant
+    //par défaut this => object courant => window
+    //a voir .call .every ...
+    var left=0;
+    var timer;
+      function accelererTrain(){
+         timer= setInterval(function(){
+          if(left<=120){
+            elemt.style.left=(left += 5)+'px';
+          } else if(left >120 || left<=240){
+            elemt.style.left=(left += 10)+'px';
+          }
+          if (left >240){
+            clearInterval( timer );
+            document.getElementById('boom').style.display=('block');
+
+          } ;
+
+        },100);
+      }
+      function stopper(message)
+      {
+        console.log(timer);
+        clearInterval(timer);
+        alert(message);
+      }
+
+
+
+
+</script>
+</body>
+</html>
